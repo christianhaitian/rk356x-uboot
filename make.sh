@@ -624,7 +624,7 @@ function pack_uboot_image()
 function pack_loader_image()
 {
 	rm *_loader_*.bin -f
-        cp ./tools/boot_merger ${RKBIN}/tools/boot_merger
+        #cp ./tools/boot_merger ${RKBIN}/tools/boot_merger
 	cd ${RKBIN}
 	${SCRIPT_LOADER} --ini ${INI_LOADER}
 	cd -
@@ -719,7 +719,7 @@ select_ini_file
 handle_args_late
 sub_commands
 clean_files
-make PYTHON=python CROSS_COMPILE=${TOOLCHAIN_GCC} all --jobs=${JOB}
+make PYTHON=python2 CROSS_COMPILE=${TOOLCHAIN_GCC} all --jobs=${JOB}
 pack_images
 #pack_idbloader
 finish

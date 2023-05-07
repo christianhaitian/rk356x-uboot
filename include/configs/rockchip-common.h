@@ -93,7 +93,7 @@
 	"name=loader1,start=32K,size=4000K,uuid=${uuid_gpt_loader1};" \
 	"name=loader2,start=8MB,size=4MB,uuid=${uuid_gpt_loader2};" \
 	"name=resource,start=12MB,size=4MB,uuid=${uuid_gpt_resource};" \
-	"name=JELOS,start=16MB,size=3072M,bootable,uuid=${uuid_gpt_boot};\0"
+	"name=ANBERNIC,start=16MB,size=3072M,bootable,uuid=${uuid_gpt_boot};\0"
 #endif
 
 #define PARTS_RKIMG \
