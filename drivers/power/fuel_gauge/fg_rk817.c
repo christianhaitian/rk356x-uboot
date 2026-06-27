@@ -963,8 +963,27 @@ static int rk817_bat_dwc_otg_check_dpdm(struct rk817_battery_device *battery)
 static bool rk817_bat_update_get_chrg_online(struct udevice *dev)
 {
 	struct rk817_battery_device *battery = dev_get_priv(dev);
+	int chrg_type;
+	int usb_vol;
 
-	return rk817_bat_dwc_otg_check_dpdm(battery);
+	chrg_type = rk817_bat_dwc_otg_check_dpdm(battery);
+	if (chrg_type != NO_CHARGER)
+		return true;
+
+	/*
+	 * Fallback for RK817 boards where DWC/DPDM charger type
+	 * detection fails during early U-Boot off-charge entry.
+	 * Only report online if the PMIC itself says plug-in is present
+	 * and USB ADC voltage confirms VBUS.
+	 */
+	if (battery->variant == RK817_ID &&
+	    (rk817_bat_read(battery, PMIC_SYS_STS) & PLUG_IN_STS)) {
+		usb_vol = rk817_bat_get_USB_voltage(battery);
+		if (usb_vol > 3500)
+			return true;
+	}
+
+	return false;
 }
 
 static int rk817_bat_get_usb_state(struct rk817_battery_device *battery)
