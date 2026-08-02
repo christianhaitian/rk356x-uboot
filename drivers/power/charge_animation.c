@@ -754,11 +754,11 @@ show_images:
 		}
 #endif
 
-                if (soc >= 98) {
-			printf("battery FULL, power off\n");
+                /*if (soc >= 98) {
+			printf("battery FULL, exit charge animation\n");
 			mdelay(20);
-			pmic_shutdown(pmic);
-                }
+			//pmic_shutdown(pmic);
+                }*/
 
                 if (charging <= 0) {
 			printf("Charger disconnected, powering off.");
