@@ -278,7 +278,7 @@ void *get_display_buffer(int size)
 
 static unsigned long get_display_size(void)
 {
-	return memory_end - memory_start;
+	return roundup(memory_end - memory_start, PAGE_SIZE);
 }
 
 static unsigned long get_single_cubic_lut_size(void)
